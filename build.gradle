@@ -3,11 +3,23 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.4.21'
 }
 
+apply plugin: 'application'
+
 group 'ru.ifmo.lapenok'
 version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+}
+
+jar {
+    baseName = 'Javalyzer'
+    version = '1.0'
+    mainClassName = 'ru.ifmo.lapenok.javalyzer.MainKt'
+    manifest {
+        attributes['Main-Class'] = 'ru.ifmo.lapenok.javalyzer.MainKt'
+    }
+    from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 
 dependencies {
